@@ -1,0 +1,79 @@
+{
+  "users": [
+    {
+      "id": "77c70039-e57a-4b24-8e3f-beabfcfcc1fd",
+      "username": "glennie590",
+      "email": "Gretchen53@gmail.com",
+      "password": "xt0XpqpkPdJ8BEI",
+      "createdAt": "2025-04-01T21:23:13.384Z"
+    },
+    {
+      "id": "04b50f40-3ac8-4e3e-bf40-5c1ee98a0988",
+      "username": "jaylan.schmitt-hackett721",
+      "email": "Wayne.Yundt31@yahoo.com",
+      "password": "g6Ye6FfS12yZ9GY",
+      "createdAt": "2025-03-15T18:35:32.435Z"
+    },
+    {
+      "id": "6fa8cd70-6208-49e4-abd1-1f210c447456",
+      "username": "remington942",
+      "email": "Godfrey26@yahoo.com",
+      "password": "SOfqsN4mI8fHlbK",
+      "createdAt": "2025-09-27T14:08:47.412Z"
+    },
+    {
+      "id": "f6a75be1-f0b7-4a29-a0b3-ea9d26d52067",
+      "username": "david_greenholt843",
+      "email": "Alda_Konopelski@yahoo.com",
+      "password": "Sayf8QUvFUr2a8P",
+      "createdAt": "2024-12-01T06:55:43.153Z"
+    },
+    {
+      "id": "828fe22e-91e8-4d9c-8da7-ea45cf26e264",
+      "username": "rhett.dare4",
+      "email": "Monserrate.Klocko17@gmail.com",
+      "password": "Q__498hQkeemMhb",
+      "createdAt": "2025-01-13T01:04:05.143Z"
+    },
+    {
+      "id": "8e656739-f15c-4969-860f-e8c3d71a80f3",
+      "username": "emilia.mcdermott05",
+      "email": "Justyn_Haley@yahoo.com",
+      "password": "HdXUc_pleOirF8c",
+      "createdAt": "2024-10-09T12:23:37.091Z"
+    },
+    {
+      "id": "fd15fe0d-90c1-4ba7-a0ec-b8a34e05979b",
+      "username": "lizzie966",
+      "email": "Harold_Reinger@gmail.com",
+      "password": "SqWB6dNJsqRKpzm",
+      "createdAt": "2025-06-02T15:11:06.801Z"
+    },
+    {
+      "id": "9fcb325c-522e-443f-b024-48da0543a9a7",
+      "username": "gerhard_altenwerth7",
+      "email": "Maymie62@hotmail.com",
+      "password": "7XZDB8g5HF2awmA",
+      "createdAt": "2025-06-18T01:21:22.619Z"
+    },
+    {
+      "id": "fb0ed5f9-3b56-4c44-abd3-4e2c04500fb2",
+      "username": "delpha.becker8",
+      "email": "Millie_Jacobs45@hotmail.com",
+      "password": "mb2WDZILf6GLTwV",
+      "createdAt": "2024-11-13T01:12:46.460Z"
+    },
+    {
+      "id": "2938a546-5f09-471d-8700-f668222dc85a",
+      "username": "keanu_koss9",
+      "email": "Bret38@hotmail.com",
+      "password": "ka5NIUB6lvqQEYq",
+      "createdAt": "2024-11-06T09:35:33.243Z"
+    },
+    {
+      "username": "david.mosciski",
+      "password": "$2b$10$Z5fp89GbAAk07WqDnoWvMOu6K8HeZ7R741SXK/BzxGvf/9e5FzN4i",
+      "email": "admin@example.com"
+    }
+  ]
+}
