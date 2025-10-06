@@ -1,7 +1,6 @@
 import { create } from 'zustand';
 import * as authService from '../services/authService';
 
-
 export interface User {
   username: string;
   email: string;
@@ -41,7 +40,19 @@ export const useAuthStore = create<AuthState>((set) => ({
       set({ error: err.message, loading: false });
     }
   },
-  logout: () => set({ user: null }),
+  logout: async () => {
+    try {
+      await authService.logout();
+      document.cookie.split(';').forEach(cookie => {
+        const eqPos = cookie.indexOf('=');
+        const name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
+        document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
+      });
+      set({ user: null });
+    } catch (err: any) {
+      console.error('Logout failed:', err);
+    }
+  },
   changePassword: async (username: string, oldPassword: string, newPassword: string) => {
     set({ loading: true, error: null });
     try {

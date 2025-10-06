@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuthStore } from '../store/authStore';
 import { useConversationsStore } from '../store/conversationsStore';
 import { useSocialStore } from '../store/socialStore';
@@ -18,6 +18,7 @@ const Conversations: React.FC<{ onSelect: (id: string) => void }> = ({ onSelect 
 	const { conversations, fetchConversations, loading, error } = useConversationsStore();
 	const { followers, following, fetchFollowers, fetchFollowing } = useSocialStore();
 	const router = useRouter();
+	const [selectedConversationId, setSelectedConversationId] = useState<string | null>(null);
 
 	useEffect(() => {
 		if (user) {
@@ -28,6 +29,7 @@ const Conversations: React.FC<{ onSelect: (id: string) => void }> = ({ onSelect 
 	}, [user, fetchConversations, fetchFollowers, fetchFollowing]);
 
 	const handleSelectConversation = (id: string) => {
+		setSelectedConversationId(id); // Update the selected conversation ID
 		onSelect(id);
 	};
 
@@ -53,13 +55,24 @@ const Conversations: React.FC<{ onSelect: (id: string) => void }> = ({ onSelect 
 			{error && <Alert severity="error" sx={{ my: 2 }}>{error}</Alert>}
 			<List>
 				{conversations.map(conv => (
-					<ListItem key={conv.id} sx={{ display: 'flex', justifyContent: 'space-between' }}>
-						<span>
+					<ListItem
+						key={conv.id}
+						sx={{
+							display: 'flex',
+							justifyContent: 'space-between',
+							padding: '12px',
+							border: '1px solid #ccc',
+							borderRadius: '8px',
+							marginBottom: '8px',
+							cursor: 'pointer',
+							backgroundColor: selectedConversationId === conv.id ? '#f0f0f0' : 'transparent',
+							color: selectedConversationId === conv.id ? '#414141' : '#f0f0f0',
+						}}
+						onClick={() => handleSelectConversation(conv.id)}
+					>
+						<span style={{ fontWeight: 'bold', color: 'inherit' }}>
 							{conv.isGroup ? <strong>{conv.name}</strong> : conv.members.filter((m: string) => m !== user?.username).join(', ')}
 						</span>
-						<Button size="small" variant="outlined" onClick={() => handleSelectConversation(conv.id)}>
-							Open
-						</Button>
 					</ListItem>
 				))}
 			</List>

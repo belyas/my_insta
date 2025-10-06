@@ -10,6 +10,7 @@ import SendIcon from '@mui/icons-material/Send';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { usePathname } from 'next/navigation';
 import { CSSProperties, use } from 'react';
 import { useAuthStore } from '../store/authStore';
@@ -67,6 +68,16 @@ export default function SidebarNav() {
             <AddBoxIcon /> Create
           </a>)}
           {authUser?.username && (<Link href={`/user/${authUser.username}`} style={{ ...navLinkStyle }}><AccountCircleIcon /> Profile</Link>)}
+          <button
+            type="button"
+            style={{ ...navLinkStyle, background: 'none', border: 'none', cursor: 'pointer' }}
+            onClick={() => {
+              useAuthStore.getState().logout();
+              window.location.href = '/login';
+            }}
+          >
+            <LogoutIcon /> Logout
+          </button>
         </div>
       </aside>
       <SearchDrawer open={searchOpen} onClose={() => setSearchOpen(false)} />

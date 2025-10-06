@@ -32,3 +32,13 @@ export async function changePassword(username: string, oldPassword: string, newP
   if (!res.ok) throw new Error(data.error || 'Password change failed');
   return data;
 }
+
+export async function logout() {
+  const res = await fetch('/api/auth/logout', {
+    method: 'POST',
+  });
+  if (!res.ok) {
+    const data = await res.json();
+    throw new Error(data.error || 'Logout failed');
+  }
+}
