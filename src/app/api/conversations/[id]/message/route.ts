@@ -9,11 +9,11 @@ const db = new Low(adapter, { conversations: [] });
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   await db.read();
   db.data ||= { conversations: [] };
-  const { id } = params;
+  const { id } = await context.params;
   const { sender, text, media } = await req.json();
   const conversation = db.data.conversations.find((c: any) => c.id === id);
   if (!conversation) return NextResponse.json({ error: 'Conversation not found' }, { status: 404 });

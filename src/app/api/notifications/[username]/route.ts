@@ -7,13 +7,16 @@ const notificationsPath = path.join(process.cwd(), 'data/notifications.json');
 const adapter = new JSONFile<{ notifications: any[] }>(notificationsPath);
 const db = new Low(adapter, { notifications: [] });
 
-export async function GET(req: NextRequest, { params }: { params: { username: string } }) {
+export async function GET(req: NextRequest, context: { params: Promise<{ username: string }> }) {
   await db.read();
   db.data ||= { notifications: [] };
-  const { username } = params;
+
+  const { username } = await context.params;
+
   if (!username) {
     return NextResponse.json({ error: 'Username required' }, { status: 400 });
   }
+
   const userNotifications = db.data.notifications.filter((n: any) => n.username === username);
   return NextResponse.json(userNotifications);
 }

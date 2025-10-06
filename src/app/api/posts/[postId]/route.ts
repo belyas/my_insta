@@ -9,10 +9,10 @@ const adapter = new JSONFile<{ posts: any[] }>(postsPath);
 const db = new Low(adapter, { posts: [] });
 const uploadsDir = path.join(process.cwd(), 'public/uploads/posts');
 
-export async function PUT(req: NextRequest, { params }: { params: { postId: string } }) {
+export async function PUT(req: NextRequest, { params }: { params: Promise<{ postId: string }> }) {
   await db.read();
   db.data ||= { posts: [] };
-  const { postId } = params;
+  const { postId } = await params;
   const idx = db.data.posts.findIndex(p => p.id === postId);
   if (idx === -1) {
     return NextResponse.json({ error: 'Post not found' }, { status: 404 });
@@ -53,10 +53,10 @@ export async function PUT(req: NextRequest, { params }: { params: { postId: stri
   return NextResponse.json(db.data.posts[idx]);
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: { postId: string } }) {
+export async function DELETE(req: NextRequest, { params }: { params: Promise<{ postId: string }> }) {
   await db.read();
   db.data ||= { posts: [] };
-  const { postId } = params;
+  const { postId } = await params;
   const idx = db.data.posts.findIndex(p => p.id === postId);
   if (idx === -1) {
     return NextResponse.json({ error: 'Post not found' }, { status: 404 });

@@ -7,7 +7,7 @@ const connectionsPath = path.join(process.cwd(), 'data/connections.json');
 const adapter = new JSONFile(connectionsPath);
 const db = new Low(adapter, []);
 
-export async function POST(req: NextRequest, { params }: { params: { userName: string } }) {
+export async function POST(req: NextRequest) {
   await db.read();
   db.data ||= [];
   const { follower, following } = await req.json();
@@ -23,7 +23,7 @@ export async function POST(req: NextRequest, { params }: { params: { userName: s
   return NextResponse.json({ follower, following });
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: { userName: string } }) {
+export async function DELETE(req: NextRequest) {
   await db.read();
   db.data ||= [];
   const { follower, following } = await req.json();

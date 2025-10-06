@@ -9,22 +9,22 @@ const db = new Low(adapter, { messages: [] });
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { conversationId: string } }
+  context: { params: Promise<{ conversationId: string }> }
 ) {
   await db.read();
   db.data ||= { messages: [] };
-  const { conversationId } = params;
+  const { conversationId } = await context.params;
   const convoMessages = db.data.messages.filter((m: any) => m.conversationId === conversationId);
   return NextResponse.json(convoMessages);
 }
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { conversationId: string } }
+  context: { params: Promise<{ conversationId: string }> }
 ) {
   await db.read();
   db.data ||= { messages: [] };
-  const { conversationId } = params;
+  const { conversationId } = await context.params; // Resolve the Promise to access `conversationId`
   const message = await req.json();
   db.data.messages.push({ ...message, conversationId });
   await db.write();

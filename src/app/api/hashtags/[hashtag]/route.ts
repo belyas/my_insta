@@ -8,10 +8,8 @@ const postsPath = path.join(process.cwd(), 'data/posts.json');
 const adapter = new JSONFile<{ posts: any[] }>(postsPath);
 const db = new Low(adapter, { posts: [] });
 
-export async function GET(req: NextRequest, { params }: { params: { hashtag: string } }) {
-  const {hashtag} = await params;
-  console.log('Searching for hashtag:', hashtag);
-
+export async function GET(req: NextRequest, context: { params: Promise<{ hashtag: string }> }) {
+  const { hashtag } = await context.params;
   if (!hashtag) {
     return NextResponse.json({ error: 'Hashtag is required' }, { status: 400 });
   }

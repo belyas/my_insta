@@ -13,7 +13,7 @@ const SearchForm: React.FC = () => {
 
 	const handleSearch = async (e: React.FormEvent) => {
 		e.preventDefault();
-		await search(query, type);
+		await search(query);
 	};
 
 	return (

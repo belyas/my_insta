@@ -9,13 +9,12 @@ const db = new Low(adapter, { profiles: [] });
 
 export async function GET(
   req: NextRequest,
-  context: { params: { username: string } }
+  context: { params: Promise<{ username: string }> }
 ) {
   await db.read();
   db.data ||= { profiles: [] };
-  const params = await context.params;
-  const username = params.username;
-  
+  const { username } = await context.params;
+
   const profile = db.data.profiles.find((p: any) => p.username === username);
   if (!profile) {
     return NextResponse.json({ error: 'Profile not found' }, { status: 404 });
@@ -30,12 +29,11 @@ export async function GET(
 
 export async function PUT(
   req: NextRequest,
-  context: { params: { username: string } }
+  context: { params: Promise<{ username: string }> }
 ) {
   await db.read();
   db.data ||= { profiles: [] };
-  const params = await context.params;
-  const username = params.username;
+  const { username } = await context.params; // Adjusted to await the Promise
   const update = await req.json();
   const idx = db.data.profiles.findIndex((p: any) => p.username === username);
   if (idx === -1) {

@@ -8,7 +8,7 @@ const adapter = new JSONFile(connectionsPath);
 const db = new Low(adapter, []);
 
 export async function GET(req: NextRequest, 
-  context: { params: { username: string } }) {
+  context: { params: Promise<{ username: string }> }) {
   await db.read();
   db.data ||= [];
   const params = await context.params;
